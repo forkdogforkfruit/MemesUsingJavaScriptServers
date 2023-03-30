@@ -11,6 +11,7 @@
 
 <body class="position-relative" data-bs-spy="scroll">
   <%- include('./partials/navbar.ejs') %>
+  
     <section class="container">
       <table class="table" id="table">
         <thead>
@@ -24,18 +25,25 @@
         <tbody>
 
           <tr>
-            <th scope="row">
+            
+            <th scope="row" id= "memes">
+             <!-- ID from json object <%- 2+2 %> -->
             </th>
             <td>
+              <!-- Size from json Object -->
+              
             </td>
             <td>
+              Image
             </td>
             <td>
+              Options
             </td>
           </tr>
         </tbody>
       </table>
     </section>
+    
     <%- include('./partials/scripts.ejs') %>
 </body>
 

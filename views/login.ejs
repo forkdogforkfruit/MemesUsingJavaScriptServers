@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Sign in</title>
+       <!--  <link rel="stylesheet" href="/font/bootstrap-icons.css"> -->
+        <link rel="stylesheet" href="../css/bootstrap.min.css"/>
+        <link href="../stylesheets/style.css" rel="stylesheet">
+        <link href="../stylesheets/home.css" rel="stylesheet">
+      </head>
+    <body class="position-relative" data-bs-spy="scroll">
+      <%- include('./partials/navbar.ejs') %>
+      <div data-spy="scroll" data-target="#navbar" data-offset="0">
+        <%- include('./partials/login.ejs') %>
+      </div>
+      <%- include('./partials/scripts.ejs') %>
+      <% if (user) { %>
+        <div class="row">
+            <p>Hey <%=user.username%>!</p>
+            <form action="/login/logout" method="post">
+                <button class="logout" type="submit">Sign out</button>
+            </form>
+        </div>
+    <% } %>
+    </body>
+</html>
