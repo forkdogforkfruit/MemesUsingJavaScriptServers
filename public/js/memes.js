@@ -8,20 +8,56 @@ function fetchData() {
    
     }).then(data => {
       console.log(data.data);
-  const id = [data.data].map(get_meme => {
-       return `
-        id: ${data.data.memes[0].id}
-        width: ${data.data.memes[0].width}
-        height: ${data.data.memes[0].height}
-        image: <img src= "${data.data.memes[0].url}"/>
-        `
-      })
-     console.log('This is the output from the variable id: ' + id)
-     
+      
+    const ID = [data.data].map(get_meme => {
+    console.log('data.length = ' + (data.data.memes.length ))
+    
+    /*functions that loops over the array and puts the images in the images column */
+    let id = 0
+    while (id < data.data.memes.length) {
+      `${data.data.memes[id].id}`
+      const tempDiv = document.createElement("div")
       document
       .querySelector('#memes')
-      .insertAdjacentHTML('afterbegin', id)
-      
+      .insertAdjacentElement('afterbegin', tempDiv)
+      .insertAdjacentHTML('afterbegin',`${data.data.memes[id].id}`)
+      id++;
+    };
+
+    //need to find a way to print width x height here. 
+    let w = 0
+    let h = 0
+    while (w < data.data.memes.length) {
+      `${data.data.memes[w].width}
+       ${data.data.memes[w].height}`
+      const tempDiv = document.createElement("div")
+      document
+      .querySelector('#size')
+      .insertAdjacentElement('afterbegin', tempDiv)
+      .insertAdjacentHTML('afterbegin',` ${data.data.memes[w].width} x ${data.data.memes[w].height}`)
+      w++;
+    }
+    let img = 0
+    while (img < data.data.memes.length) {
+      `<img src= "${data.data.memes[img].url}"/>`
+      const tempDiv = document.createElement("div")
+      document
+      .querySelector('#image')
+      .insertAdjacentElement('afterbegin', tempDiv)
+      .insertAdjacentHTML('afterbegin',`<img src= "${data.data.memes[img].url}"/>`)
+      img++;
+    }
+    let options = 0
+    while (options < data.data.memes.length) {
+      `${data.data.memes[options].name}`
+      const tempDiv = document.createElement("div")
+      document
+      .querySelector('#options')
+      .insertAdjacentElement('afterbegin', tempDiv)
+      .insertAdjacentHTML('afterbegin',`${data.data.memes[options].name}`)
+      options++;
+    }
+      })
     }).catch(error => {
       (console.log(error))
     });

@@ -2,24 +2,54 @@
 <html lang="en">
     <head>
         <title>Sign in</title>
-       <!--  <link rel="stylesheet" href="/font/bootstrap-icons.css"> -->
+        <%- include('./partials/head.ejs') %>
+       <link rel="stylesheet" href="/font/bootstrap-icons.css">
         <link rel="stylesheet" href="../css/bootstrap.min.css"/>
         <link href="../stylesheets/style.css" rel="stylesheet">
-        <link href="../stylesheets/home.css" rel="stylesheet">
+        
+       <!--  <link rel="stylesheet" href="/css/base.css">
+        <link rel="stylesheet" href="/css/index.css">
+        <link rel="stylesheet" href="/css/login.css"> -->
+        <!-- <link href="../stylesheets/home.css" rel="stylesheet">
+        <link href="../stylesheets/navbar.css" rel="stylesheet"> -->
+
+       
+      
       </head>
-    <body class="position-relative" data-bs-spy="scroll">
+      <body class="position-relative" data-bs-spy="scroll">
       <%- include('./partials/navbar.ejs') %>
-      <div data-spy="scroll" data-target="#navbar" data-offset="0">
-        <%- include('./partials/login.ejs') %>
-      </div>
-      <%- include('./partials/scripts.ejs') %>
-      <% if (user) { %>
-        <div class="row">
-            <p>Hey <%=user.username%>!</p>
-            <form action="/login/logout" method="post">
-                <button class="logout" type="submit">Sign out</button>
-            </form>
+      <header id="home">
+        <div class="container-fluid header-content">
+          <div class="row">
+            <div class="col">
+              <div class="content-box text-center text-light">
+                <h1>Log in to Meme Central</h1>
+                <!-- Sign in form added here -->
+                            <form action="/login/password" method="post">
+                                <section>
+                                    <label for="username">Username</label>
+                                    <input id="username" name="username" type="text" autocomplete="username" required autofocus>
+                                </section>
+                                <section>
+                                    <label for="current-password">Password</label>
+                                    <input id="current-password" name="password" type="password" autocomplete="current-password" 
+                required>
+                                </section>
+                                <button type="submit">Log in</button>
+                            </form>
+
+              </div>
+            </div>
+          </div>
         </div>
-    <% } %>
+      </header>
+
+        </div>
+      
+      </div>
+      
+			
+      <%- include('./partials/scripts.ejs') %>
+      
     </body>
 </html>

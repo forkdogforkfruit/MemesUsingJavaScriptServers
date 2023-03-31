@@ -1,12 +1,14 @@
 var express = require('express');
+var passport = require('passport')
+var LocalStrategy = require('passport-local');
+var crypto = require('crypto');
+/* var db = require('../db'); */
 var router = express.Router();
 const fs = require("fs")
 const path = require("path")
-var passport = require('passport')
-var LocalStrategy = require('passport-local');
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session)
-
+ 
 passport.serializeUser(function(user, cb) {
   process.nextTick(function() {
     cb(null, { id: user.id, username: user.username });
@@ -22,6 +24,7 @@ passport.deserializeUser(function(user, cb) {
 passport.use(new LocalStrategy(function verify(username, password, cb) {
   let usersArray = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../data/users.json")));
   let filteredArray = usersArray.filter(x => x.username = username);
+  console.log(x)
   if (filteredArray.length > 0) {
     let usersData = filteredArray[0];
     if (usersData.password == password) {
@@ -33,19 +36,21 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
   }
 }));
 
-router.post('/password', passport.authenticate('local', {
-    successReturnToOrRedirect: '/',
-    failureRedirect: '/login'
-  }));
-
   router.get('/', function(req, res, next) {
     if(!req.user) {
+     
       res.render('login', {user: null});
     }
     else {
       res.render('login', {user: req.user});
+      console.log(user)
     }
   });
+
+  router.post('/password', passport.authenticate('local', { 
+    successReturnToOrRedirect: '/memes',
+    failureRedirect: '/login'
+  }));
 
   router.post('/logout', function(req, res, next) {
     req.logout(function(err) {
@@ -54,16 +59,13 @@ router.post('/password', passport.authenticate('local', {
     });
   });
   
-/*   router.use(session({
+  router.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
     store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
-  }));
-  router.use(passport.authenticate('session')); */
-  
-  
-  
+   }));
+  router.use(passport.authenticate('session'));
   
   
 
@@ -76,11 +78,5 @@ var router = express.Router();
 const axios = require('axios');
 
 /* router.get('/', function (req, res, next) {}); 
-
-router.get('/', (req, res) => {
-    console.log("Sign in in Navbar clicked")
-    res.send("You clicked on  Sign In")
-    
-     })
-
-module.exports = router; */
+*/
+module.exports = router;

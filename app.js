@@ -7,19 +7,22 @@ var logger = require('morgan');
 var app = express();
 
 var https = require('https');
+var passport = require('passport');
+var session = require('express-session');
+/* var SQLiteStore = require('connect-sqlite3')(session); */
+
 
 
 var indexRouter = require('./routes/index');
-
+const authRouter = require('./routes/auth');
+/* const loginRouter = require('./routes/login');
+ */
 const memesRouter = require('./routes/memes');
-const loginRouter = require('./routes/login');
 
-//not sure if need the below in app.js
 var passport = require('passport');
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
 
-// var highlightsRouter = require('./routes/highlights');
 
 
 // view engine setup
@@ -36,10 +39,20 @@ app.use(express.static(__dirname + '/node_modules/bootstrap-icons'));
 app.use(express.static(path.join(__dirname, 'stylesheets')));
 app.use(express.json());
 
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
+}));
+app.use(passport.authenticate('session'));
+
+
 
 app.use('/', indexRouter);
 app.use('/memes', memesRouter);
-app.use('/login', loginRouter);
+app.use('/', authRouter);
+
 
 //Getting an API response 
 
