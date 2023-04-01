@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head class="">
+    <title>Memes</title>
+  <div class="container-fluid header-content">
+    <!-- BM Chaneg the path to the css files -->
 
-<head>
-  <title>Memes</title>
-  <!-- BM Chaneg the path to the css files -->
-  <link rel="stylesheet" href="../../css/bootstrap.min.css" />
-  <link href="../../stylesheets/navbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <link href="../../stylesheets/navbar.css" rel="stylesheet" />
+    <link href="../../stylesheets/style.css" rel="stylesheet" />
+    <%- include('./partials/head.ejs') %>
+  </head>
 
-</head>
-
-<body class="position-relative" data-bs-spy="scroll">
-  <%- include('./partials/navbar.ejs') %>
-  <%- include('./partials/memes.ejs') %>
-  
- 
-    
+  <body class="position-relative navbar"  data-bs-spy="scroll">
+    <%- include('./partials/navbar.ejs') %> 
+    <%- include('./partials/memes.ejs') %> 
     <%- include('./partials/scripts.ejs') %>
-</body>
-
+  </body>
+  </div>
 </html>

@@ -36,7 +36,6 @@ function fetchData() {
       id++;
     };
 
-    //need to find a way to print width x height here. 
     let w = 0
     
     while (w < data.data.memes.length) {
@@ -70,11 +69,9 @@ function fetchData() {
       options++;
     }
       })
-    // }).catch(error => {
-    //   (console.log(error))
-    // });
+   
   }
   
-  fetchData(); 
-
+  /* fetchData(); 
+ */
   

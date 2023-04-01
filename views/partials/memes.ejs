@@ -1,4 +1,8 @@
-<section class="container">
+<link href="../../stylesheets/style.css" rel="stylesheet" />
+<section>
+  <%- include('../partials/head.ejs') %>
+
+
   <table class="table" id="table">
     <thead>
       <tr>
@@ -7,10 +11,11 @@
         <th scope="col">Image</th>
         <th scope="col">Options</th>
       </tr>
+     
     </thead>
-    <tbody>
-      
+    <tbody>   
 <% for(i=0; i<locals.memesList.memes.length; i++) { %>
+  
       <tr>
         
         <th scope="row" id= "memes">
@@ -23,12 +28,16 @@
         <td id="image">
 
            <img src= "<%= locals.memesList.memes[i].url %>" width="<%=locals.memesList.memes[i].width * 0.2%>" height="<%locals.memesList.memes[i].height * 0.2%>"/>
+           
+           <button type="button" name= "details" type="submit" >Details</button>
         </td>
         <td id="options">
           <%= locals.memesList.memes[i].name %>
+          
         </td>
       </tr>
       <% } %>
     </tbody>
+  
   </table>
 </section>
