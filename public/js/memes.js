@@ -1,16 +1,28 @@
+
 function fetchData() {
-    fetch("https://api.imgflip.com/get_memes").then(response => {
-      if(!response.ok) {
-        console.log(response);
-        throw Error ('Error');
-      }
-   return response.json();
+  //   fetch("https://api.imgflip.com/get_memes").then(response => {
+  //     if(!response.ok) {
+  //       console.log(response);
+  //       throw Error ('Error');
+  //     }
+  //  return response.json();
    
-    }).then(data => {
-      console.log(data.data);
+  //   }).then(data => {
+  //     console.log(data.data);
+
+//   if(locals.memes === undefined) {
+//   get(memes_url).then(
+//     function (response) {
+//       memesList = response.data.memes   
+//     }
+//   ).catch(function (error) {
+//     // handle error
+//     console.log(error);
+//   })
+// }
       
-    const ID = [data.data].map(get_meme => {
-    console.log('data.length = ' + (data.data.memes.length ))
+    const ID = locals.memesList.map(get_meme => {
+    /* console.log('data.length = ' + (data.data.memes.length )) */
     
     /*functions that loops over the array and puts the images in the images column */
     let id = 0
@@ -26,7 +38,7 @@ function fetchData() {
 
     //need to find a way to print width x height here. 
     let w = 0
-    let h = 0
+    
     while (w < data.data.memes.length) {
       `${data.data.memes[w].width}
        ${data.data.memes[w].height}`
@@ -39,12 +51,12 @@ function fetchData() {
     }
     let img = 0
     while (img < data.data.memes.length) {
-      `<img src= "${data.data.memes[img].url}"/>`
+      
       const tempDiv = document.createElement("div")
       document
       .querySelector('#image')
       .insertAdjacentElement('afterbegin', tempDiv)
-      .insertAdjacentHTML('afterbegin',`<img src= "${data.data.memes[img].url}"/>`)
+      .insertAdjacentHTML('afterbegin',`<img src= "${data.data.memes[img].url}" width="${data.data.memes[img].width * 0.2}" height="${data.data.memes[img].height * 0.2}"/>`)
       img++;
     }
     let options = 0
@@ -58,9 +70,9 @@ function fetchData() {
       options++;
     }
       })
-    }).catch(error => {
-      (console.log(error))
-    });
+    // }).catch(error => {
+    //   (console.log(error))
+    // });
   }
   
   fetchData(); 

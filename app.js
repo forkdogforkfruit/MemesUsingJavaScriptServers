@@ -1,4 +1,6 @@
-var createError = require('http-errors');
+require('dotenv').config();
+
+/* var createError = require('http-errors'); */
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -9,21 +11,19 @@ var app = express();
 var https = require('https');
 var passport = require('passport');
 var session = require('express-session');
-/* var SQLiteStore = require('connect-sqlite3')(session); */
-
-
+var axios = require('axios');
 
 var indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 /* const loginRouter = require('./routes/login');
  */
 const memesRouter = require('./routes/memes');
+const memeRouter = require('./routes/meme');
+const prefetchMemesRouter = require('./routes/prefetchMemes')
 
 var passport = require('passport');
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session);
-
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -51,7 +51,9 @@ app.use(passport.authenticate('session'));
 
 app.use('/', indexRouter);
 app.use('/memes', memesRouter);
+app.use('/meme', memeRouter);
 app.use('/', authRouter);
+app.use('/api/memes', prefetchMemesRouter)
 
 
 //Getting an API response 

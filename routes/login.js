@@ -2,24 +2,29 @@ var express = require('express');
 var passport = require('passport')
 var LocalStrategy = require('passport-local');
 var crypto = require('crypto');
-/* var db = require('../db'); */
+var db = require('../db');
 var router = express.Router();
 const fs = require("fs")
 const path = require("path")
 var session = require('express-session');
 var SQLiteStore = require('connect-sqlite3')(session)
  
-passport.serializeUser(function(user, cb) {
-  process.nextTick(function() {
-    cb(null, { id: user.id, username: user.username });
-  });
-});
+passport.use(new LocalStrategy(
+  function verify(username, password, callback) {
+    db.get('SELECT * FROM users WHERE username = ?', [ username ], function(err, row) {
+      if (err) { return callback(err); }
+      if (!row) { return callback(null, false, { message: 'Incorrect username or password.' }); }
 
-passport.deserializeUser(function(user, cb) {
-  process.nextTick(function() {
-    return cb(null, user);
-  });
-});
+      crypto.pbkdf2(password, row.salt, 310000, 32, 'sha256', function(err, hashedPassword) {
+        if (err) { return callback(err); }
+        if (!crypto.timingSafeEqual(row.hashed_password, hashedPassword)) {
+          return callback(null, false, { message: 'Incorrect username or password.' });
+        }
+        return callback(null, row);
+      });
+    });
+  })
+);
 
 passport.use(new LocalStrategy(function verify(username, password, cb) {
   let usersArray = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../data/users.json")));
@@ -36,6 +41,20 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
   }
 }));
 
+passport.serializeUser(function(user, cb) {
+  process.nextTick(function() {
+    cb(null, { id: user.id, username: user.username });
+  });
+});
+
+passport.deserializeUser(function(user, cb) {
+  process.nextTick(function() {
+    return cb(null, user);
+  });
+});
+
+
+
   router.get('/', function(req, res, next) {
     if(!req.user) {
      
@@ -48,11 +67,12 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
   });
 
   router.post('/password', passport.authenticate('local', { 
-    successReturnToOrRedirect: '/memes',
+    successReturnToOrRedirect: '/',
     failureRedirect: '/login'
   }));
 
   router.post('/logout', function(req, res, next) {
+    
     req.logout(function(err) {
       if (err) { return next(err); }
       res.redirect('/login');
@@ -67,8 +87,6 @@ passport.use(new LocalStrategy(function verify(username, password, cb) {
    }));
   router.use(passport.authenticate('session'));
   
-  
-
 module.exports = router
 
 //This was the offered text. Above I have copy and pasted from example during lesson 

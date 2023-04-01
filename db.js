@@ -4,10 +4,10 @@ var crypto = require('crypto');
 
 mkdirp.sync('./var/db');
 
-var db = new sqlite3.Database('./var/db/todos.db');
+var db = new sqlite3.Database('./var/db/memes.db');
 
 db.serialize(function() {
-  // create the database schema for the todos app
+  // create the database schema for the memes app
   db.run("CREATE TABLE IF NOT EXISTS users ( \
     id INTEGER PRIMARY KEY, \
     username TEXT UNIQUE, \
@@ -26,7 +26,7 @@ db.serialize(function() {
     UNIQUE (provider, subject) \
   )");
   
-  db.run("CREATE TABLE IF NOT EXISTS todos ( \
+  db.run("CREATE TABLE IF NOT EXISTS memes ( \
     id INTEGER PRIMARY KEY, \
     owner_id INTEGER NOT NULL, \
     title TEXT NOT NULL, \

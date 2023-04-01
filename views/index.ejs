@@ -8,8 +8,16 @@
 
 <body class="position-relative" data-bs-spy="scroll">
   <%- include('./partials/navbar.ejs') %>
+  <section><nav class="nav">
+   <!--  adds a button to home screen  not needed-->
+       <!--  <form action="/logout" method="post">
+          <button class="logout" type="submit">Log ou out</button>
+        </form> -->
+      
+    
+  </nav>
 
-    <header id="home">
+  <header id="home">
       <div class="container-fluid header-content">
         <div class="row">
           <div class="col">
@@ -20,8 +28,9 @@
         </div>
       </div>
     </header>
-   
+   </section>
     <%- include('./partials/scripts.ejs') %>
+  </section>
 </body>
 
 </html>

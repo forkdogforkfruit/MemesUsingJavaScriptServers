@@ -1,6 +1,34 @@
-<!-- <ul>
-    <%memesOverview.forEach(function(id){ %>
-      <li>Hello Does this message show up? <%- id %></li>
-      console.log("Logging an id from memes Overview");
-    <% }); %>
-</ul> -->
+<section class="container">
+  <table class="table" id="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Size</th>
+        <th scope="col">Image</th>
+        <th scope="col">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+<% for(i=0; i<locals.memesList.memes.length; i++) { %>
+      <tr>
+        
+        <th scope="row" id= "memes">
+          <%= locals.memesList.memes[i].id %>
+        </th>
+        <td id="size">
+          <!-- Size from json Object -->
+          <%= locals.memesList.memes[i].width %> x <%= locals.memesList.memes[i].height %>
+        </td>
+        <td id="image">
+
+           <img src= "<%= locals.memesList.memes[i].url %>" width="<%=locals.memesList.memes[i].width * 0.2%>" height="<%locals.memesList.memes[i].height * 0.2%>"/>
+        </td>
+        <td id="options">
+          <%= locals.memesList.memes[i].name %>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</section>

@@ -42,20 +42,6 @@ passport.use(new LocalStrategy(
     });
   });
 
-/*   passport.use(new LocalStrategy(function verify(username, password, cb) {
-    let usersArray = JSON.parse(fs.readFileSync(path.resolve(__dirname, "/data/users.json")));
-    let filteredArray = usersArray.filter(x => x.username = username);
-    if (filteredArray.length > 0) {
-      let usersData = filteredArray[0];
-      if (usersData.password == password) {
-        return cb(null, usersData);
-      }
-    }
-    else {
-      return cb(null, false);
-    }
-  })); */
-
   router.post('/login/password', passport.authenticate('local', {
     successRedirect: '/memes',
     failureRedirect: '/login'
@@ -89,10 +75,26 @@ passport.use(new LocalStrategy(
         req.login(user, function(err) {
           if (err) { return next(err); }
           res.redirect('/');
-        });
+        });0
       });
     });
   });
+
+
+  //Below results in "Path not defined" when trying to log in with usernames from users.json
+/*   passport.use(new LocalStrategy(function verify(username, password, cb) {
+    let usersArray = JSON.parse(fs.readFileSync(path.resolve(__dirname, '/users.json')));
+    let filteredArray = usersArray.filter(x => x.username = username);
+    if (filteredArray.length > 0) {
+      let usersData = filteredArray[0];
+      if (usersData.password == password) {
+        return cb(null, usersData);
+      }
+    }
+    else {
+      return cb(null, false);
+    }
+  })); */
   
 
   
