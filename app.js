@@ -7,16 +7,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var app = express();
-
-var https = require('https');
 var passport = require('passport');
 var session = require('express-session');
+
 var axios = require('axios');
 
 var indexRouter = require('./routes/index');
-const authRouter = require('./routes/auth');
-/* const loginRouter = require('./routes/login');
- */
+const authRouter = require('./routes/auth'); //this currently renders a possible log out. 
+const loginRouter = require('./routes/login');
 const memesRouter = require('./routes/memes');
 const memeRouter = require('./routes/meme');
 const prefetchMemesRouter = require('./routes/prefetchMemes')
@@ -39,6 +37,8 @@ app.use(express.static(__dirname + '/node_modules/bootstrap-icons'));
 app.use(express.static(path.join(__dirname, 'stylesheets')));
 app.use(express.json());
 
+
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -47,12 +47,21 @@ app.use(session({
 }));
 app.use(passport.authenticate('session'));
 
+/* app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
+}));
+app.use(passport.authenticate('session')); */
+
 
 
 app.use('/', indexRouter);
 app.use('/memes', memesRouter);
 app.use('/meme', memeRouter);
 app.use('/', authRouter);
+app.use('/', loginRouter);
 app.use('/api/memes', prefetchMemesRouter)
 
 
