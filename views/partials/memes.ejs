@@ -3,7 +3,6 @@
 <section>
   <%- include('../partials/head.ejs') %>
 
-
   <table class="table memes-table" id="table">
     <thead>
       <tr>
@@ -17,24 +16,20 @@
     <tbody>   
 <% for(i=0; i<locals.memesList.memes.length; i++) {
   const meme = locals.memesList.memes[i] %>
-  
-      <tr>
-        
+      <tr>  
         <th scope="row" id= "memes">
           <%= meme.id %>
         </th>
-        <td id="size">
-          
+        <td id="size">    
           <%= meme.width %> x <%= meme.height %>
         </td>
         <td id="image">
-
-           <img src= "<%= meme.url %>" width="<%=meme.width * 0.2%>" height="<% meme.height * 0.2%>"/>
-         <div>
-           <button type="button" class="details-button">
-           <a class="nav-link" href='/meme/<%= meme.id %>'>Details </a>
-          </button>
-         </div>
+          <img src= "<%= meme.url %>" width="<%=meme.width * 0.2%>" height="<% meme.height * 0.2%>"/>
+          <div>
+            <button type="button" class="details-button">
+              <a class="nav-link" href='/meme/<%= meme.id %>'>Details </a>
+            </button>
+          </div>
         </td>
         <td id="options">
           <%= locals.memesList.memes[i].name %>

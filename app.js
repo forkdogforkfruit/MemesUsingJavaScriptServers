@@ -13,7 +13,6 @@ var session = require('express-session');
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 
-// const loginRouter = require('./routes/login');
 const memesRouter = require('./routes/memes');
 const memeRouter = require('./routes/meme');
 const prefetchMemesRouter = require('./routes/prefetchMemes')
@@ -60,7 +59,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;
 

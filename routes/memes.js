@@ -12,8 +12,6 @@ var https = require('https');
 const { default: axios } = require('axios');
 
 
-
-
 router.get('/', function (req, res, next) {
   axios.get('http://localhost:3000/api/memes').then((response) => {
     // console.log('API response', response.data)
@@ -21,8 +19,6 @@ router.get('/', function (req, res, next) {
   })
   
 });
-
-
 
 
 module.exports = router;
