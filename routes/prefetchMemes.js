@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
         axios.get(memes_url).then(
           function (response) {
             memesList = response.data.data.memes   
-            console.log('Response: ', memesList)
+           /*  console.log('Response: ', memesList) */
           }
         ).catch(function (error) {
           // handle error

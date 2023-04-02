@@ -30,8 +30,15 @@
 
            <img src= "<%= locals.memesList.memes[i].url %>" width="<%=locals.memesList.memes[i].width * 0.2%>" height="<%locals.memesList.memes[i].height * 0.2%>"/>
            <form action="/meme" method="post"></form>
-           <button type="button" name= "details" type="submit" >Details</button>
+           <button type="button">
+           <a class="nav-link" href="/meme">Details </a>
+          </button>
            </form>
+           <script>
+            document.querySelector("a[href='meme']").addEventListener("click", function() { console.log("xxx")})
+           </script>
+
+         
         </td>
         <td id="options">
           <%= locals.memesList.memes[i].name %>
