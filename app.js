@@ -11,7 +11,9 @@ var passport = require('passport');
 var session = require('express-session');
 
 var indexRouter = require('./routes/index');
-const loginRouter = require('./routes/login');
+var authRouter = require('./routes/auth');
+
+// const loginRouter = require('./routes/login');
 const memesRouter = require('./routes/memes');
 const memeRouter = require('./routes/meme');
 const prefetchMemesRouter = require('./routes/prefetchMemes')
@@ -41,17 +43,11 @@ app.use(session({
 app.use(passport.authenticate('session'));
 
 
-
-
-
 app.use('/', indexRouter);
+app.use('/', authRouter);
 app.use('/memes', memesRouter);
 app.use('/meme/', memeRouter);
-app.use('/', loginRouter);
 app.use('/api/', prefetchMemesRouter)
-
-
-//Getting an API response 
 
 
 // error handler

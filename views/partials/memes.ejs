@@ -4,7 +4,7 @@
   <%- include('../partials/head.ejs') %>
 
 
-  <table class="table" id="table">
+  <table class="table memes-table" id="table">
     <thead>
       <tr>
         <th scope="col">ID</th>
@@ -24,33 +24,20 @@
           <%= meme.id %>
         </th>
         <td id="size">
-          <!-- Size from json Object -->
+          
           <%= meme.width %> x <%= meme.height %>
         </td>
         <td id="image">
 
            <img src= "<%= meme.url %>" width="<%=meme.width * 0.2%>" height="<% meme.height * 0.2%>"/>
-          
-           <button id="moreDetails" type="button" onclick="openDetails()">Details using JS</button>
-         
-         
-           <button type="button">
+         <div>
+           <button type="button" class="details-button">
            <a class="nav-link" href='/meme/<%= meme.id %>'>Details </a>
           </button>
-
-           
-           
-           <script>
-            function openDetails() {
-              window.open('/meme')
-                         }
-           </script>
-
-         
+         </div>
         </td>
         <td id="options">
           <%= locals.memesList.memes[i].name %>
-          
         </td>
       </tr>
       <% } %>
