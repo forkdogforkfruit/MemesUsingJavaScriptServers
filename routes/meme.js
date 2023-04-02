@@ -7,4 +7,12 @@ router.get('/index', (req, res, next) => {
     res.render('index')
     
      }) 
+
+     router.get('/', function(req, res) {
+      
+        res.render('meme')
+    
+      })
+
+
 module.exports = router;
