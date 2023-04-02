@@ -15,27 +15,35 @@
      
     </thead>
     <tbody>   
-<% for(i=0; i<locals.memesList.memes.length; i++) { %>
+<% for(i=0; i<locals.memesList.memes.length; i++) {
+  const meme = locals.memesList.memes[i] %>
   
       <tr>
         
         <th scope="row" id= "memes">
-          <%= locals.memesList.memes[i].id %>
+          <%= meme.id %>
         </th>
         <td id="size">
           <!-- Size from json Object -->
-          <%= locals.memesList.memes[i].width %> x <%= locals.memesList.memes[i].height %>
+          <%= meme.width %> x <%= meme.height %>
         </td>
         <td id="image">
 
-           <img src= "<%= locals.memesList.memes[i].url %>" width="<%=locals.memesList.memes[i].width * 0.2%>" height="<%locals.memesList.memes[i].height * 0.2%>"/>
-           <form action="/meme" method="post"></form>
+           <img src= "<%= meme.url %>" width="<%=meme.width * 0.2%>" height="<% meme.height * 0.2%>"/>
+          
+           <button id="moreDetails" type="button" onclick="openDetails()">Details using JS</button>
+         
+         
            <button type="button">
-           <a class="nav-link" href="/meme">Details </a>
+           <a class="nav-link" href='/meme/<%= meme.id %>'>Details </a>
           </button>
-           </form>
+
+           
+           
            <script>
-            document.querySelector("a[href='meme']").addEventListener("click", function() { console.log("xxx")})
+            function openDetails() {
+              window.open('/meme')
+                         }
            </script>
 
          

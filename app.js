@@ -47,22 +47,16 @@ app.use(session({
 }));
 app.use(passport.authenticate('session'));
 
-/* app.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false,
-  store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
-}));
-app.use(passport.authenticate('session')); */
+
 
 
 
 app.use('/', indexRouter);
 app.use('/memes', memesRouter);
-app.use('/meme', memeRouter);
+app.use('/meme/', memeRouter);
 app.use('/', authRouter);
 app.use('/', loginRouter);
-app.use('/api/memes', prefetchMemesRouter)
+app.use('/api/', prefetchMemesRouter)
 
 
 //Getting an API response 

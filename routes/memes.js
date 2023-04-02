@@ -15,7 +15,6 @@ const { default: axios } = require('axios');
 
 
 
-//BM New API endpoint to use for the data from the soccer API
 router.get('/', function (req, res, next) {
   axios.get('http://localhost:3000/api/memes').then((response) => {
     // console.log('API response', response.data)

@@ -1,17 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Meme Info</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link href="../stylesheets/navbar.css" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="../stylesheets/meme.css"> -->
+  </head>
 
-<head>
-  <title>Meme Info</title>
-  <link rel="stylesheet" href="../css/bootstrap.min.css" />
-  <link href="../stylesheets/navbar.css" rel="stylesheet">
-  <link rel="stylesheet" href="../stylesheets/meme.css">
-</head>
-
-<body class="position-relative" data-bs-spy="scroll">
-  <%- include('./partials/navbar.ejs') %>
+  <body class="position-relative" data-bs-spy="scroll">
+    <%- include('./partials/navbar.ejs') %>
     <section class="container">
-
+     
       <table class="table" id="table">
         <thead>
           <tr>
@@ -23,28 +22,19 @@
           </tr>
         </thead>
         <tbody>
-
           <tr>
-            <th scope="row">
-              ID inserted here
-            </th>
+            <th scope="row"><%= locals.meme.meme.id %></th>
+            <td><%= locals.meme.meme.url %></td>
+            <td><img src="<%= locals.meme.meme.url %>" /></td>
+            <td><%= locals.meme.meme.name %></td>
             <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-             <td>
+              <%= locals.meme.meme.width %> x <%= locals.meme.meme.height %>
             </td>
           </tr>
         </tbody>
       </table>
-    
-
-
     </section>
 
     <%- include('./partials/scripts.ejs') %>
-</body>
-
+  </body>
 </html>
