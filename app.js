@@ -10,18 +10,11 @@ var app = express();
 var passport = require('passport');
 var session = require('express-session');
 
-var axios = require('axios');
-
 var indexRouter = require('./routes/index');
-const authRouter = require('./routes/auth'); //this currently renders a possible log out. 
 const loginRouter = require('./routes/login');
 const memesRouter = require('./routes/memes');
 const memeRouter = require('./routes/meme');
 const prefetchMemesRouter = require('./routes/prefetchMemes')
-
-var passport = require('passport');
-var session = require('express-session');
-var SQLiteStore = require('connect-sqlite3')(session);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,7 +36,7 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false,
-  store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
+  cookie: { secure: true }
 }));
 app.use(passport.authenticate('session'));
 
@@ -54,7 +47,6 @@ app.use(passport.authenticate('session'));
 app.use('/', indexRouter);
 app.use('/memes', memesRouter);
 app.use('/meme/', memeRouter);
-app.use('/', authRouter);
 app.use('/', loginRouter);
 app.use('/api/', prefetchMemesRouter)
 
